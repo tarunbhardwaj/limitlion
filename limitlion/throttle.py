@@ -4,7 +4,7 @@ import time
 
 import pkg_resources
 
-KEY_FORMAT = 'throttle:{}'
+KEY_FORMAT = 'throttle:{{{}}}'
 
 # throttle knob defaults
 THROTTLE_BURST_DEFAULT = 1
@@ -77,8 +77,8 @@ def throttle(
 
     _verify_configured()
     allowed, tokens, sleep = throttle_script(
-        keys=[],
-        args=[KEY_FORMAT.format(name), rps, burst, window, requested_tokens],
+        keys=[KEY_FORMAT.format(name)],
+        args=[rps, burst, window, requested_tokens],
     )
     # Converting the string sleep to a float causes floating point rounding
     # issues that limits having true microsecond resolution for the sleep
