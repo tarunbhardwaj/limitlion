@@ -4,7 +4,7 @@ import time
 
 import pkg_resources
 
-KEY_FORMAT = 'throttle:{}'
+KEY_FORMAT = 'throttle:{{{}}}'
 
 throttle_script = None
 redis = None
@@ -55,9 +55,8 @@ def throttle(name, rps, burst=1, window=5, requested_tokens=1):
     """
 
     _verify_configured()
-    allowed, tokens, sleep = throttle_script(keys=[],
-                                             args=[KEY_FORMAT.format(name),
-                                                   rps, burst, window,
+    allowed, tokens, sleep = throttle_script(keys=[KEY_FORMAT.format(name)],
+                                             args=[rps, burst, window,
                                                    requested_tokens])
     # Converting the string sleep to a float causes floating point rounding
     # issues that limits having true microsecond resolution for the sleep

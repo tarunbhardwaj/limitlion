@@ -3,7 +3,7 @@
 from setuptools import setup
 
 install_requires = [
-    'redis==2.10.6'
+    'redis>=3.0.0,<3.4.0',
 ]
 
 tests_require = install_requires + [
